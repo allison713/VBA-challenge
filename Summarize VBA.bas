@@ -25,7 +25,7 @@ End Sub
 Sub Tickers()
 
     'Create a variable to track the last row in each sheet
-    Dim lastrow As Integer
+    Dim lastrow As Variant
     
     'Create a counter to keep track of the row in the summary chart
     Dim a As Integer
@@ -48,7 +48,7 @@ Sub Tickers()
     For Each ws In ActiveWorkbook.Worksheets
     
         'Define last row for each worksheet
-        lastrow = ws.Cells(Rows.count, 1).End(xlUp).Row
+        lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
         
         'Reset a in each new worksheet
         a = 2
