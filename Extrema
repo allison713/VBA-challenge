@@ -10,22 +10,28 @@ End Sub
 
 Sub formatting()
     
-    'Rename the top row of cells
-    Worksheets("2018").Range("Q1").Value = "Ticker"
-    Worksheets("2018").Range("R1").Value = "Value"
-    Worksheets("2018").Range("P2").Value = "Greatest % Incr"
-    Worksheets("2018").Range("P3").Value = "Greatest % Decr"
-    Worksheets("2018").Range("P4").Value = "Greatest Volume"
-    'Resize the rows
-    Worksheets("2018").Range("R1").ColumnWidth = 9.86
-    Worksheets("2018").Range("Q1").ColumnWidth = 5.71
-    Worksheets("2018").Range("P1").ColumnWidth = 15.86
-    'Color the table
-    Worksheets("2018").Range("Q1:R1").Interior.ColorIndex = 15
-    Worksheets("2018").Range("P2").Interior.ColorIndex = 15
-    Worksheets("2018").Range("P3").Interior.ColorIndex = 48
-    Worksheets("2018").Range("P4").Interior.ColorIndex = 16
-    'Border on the table
+    Dim ws As Worksheet
+    For Each ws In ActiveWorkbook.Worksheets
+        
+        'Rename the top row of cells
+        ws.Range("Q1").Value = "Ticker"
+        ws.Range("R1").Value = "Value"
+        ws.Range("P2").Value = "Greatest % Incr"
+        ws.Range("P3").Value = "Greatest % Decr"
+        ws.Range("P4").Value = "Greatest Volume"
+
+        'Resize the rows
+        ws.Range("R1").ColumnWidth = 9.86
+        ws.Range("Q1").ColumnWidth = 5.71
+        ws.Range("P1").ColumnWidth = 15.86
+       
+        'Color the table
+        ws.Range("Q1:R1").Interior.ColorIndex = 15
+        ws.Range("P2").Interior.ColorIndex = 15
+        ws.Range("P3").Interior.ColorIndex = 48
+        ws.Range("P4").Interior.ColorIndex = 16
+        
+    Next ws
 
 End Sub
 
@@ -33,7 +39,6 @@ Sub Greatest_Percent()
 
     Dim ws As Worksheet
     Dim max As Double
-        max = Worksheets("2018").Range("L2").Value
     Dim maxticker As String
     
     'Loop through each worksheet
@@ -41,6 +46,9 @@ Sub Greatest_Percent()
     
         'Define last row for each worksheet
         lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+        
+        'Define the max as the first value to start. Later overridden by any larger values.
+        max = ws.Range("L2").Value
         
         'Loop through rows on each worksheet to find the maximum overall
         For i = 2 To lastrow
@@ -53,13 +61,15 @@ Sub Greatest_Percent()
                 
             End If
         Next i
+        
+        'Record the max before moving to the next worksheet
+        ws.Range("Q2").Value = maxticker
+        ws.Range("R2").Value = max
+        
+        'Correct the formatting before moving to the next worksheet
+        ws.Range("R2").Value = Format(max, "Percent")
+                
     Next ws
-    
-    'Document the maximum percent increase
-    Worksheets("2018").Range("R2").Value = Format(max, "Percent")
-    
-    'Document the maximum ticker
-    Worksheets("2018").Range("Q2").Value = maxticker
 
 End Sub
 
