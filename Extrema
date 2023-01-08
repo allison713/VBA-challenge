@@ -64,9 +64,6 @@ Sub Greatest_Percent()
         
         'Record the max before moving to the next worksheet
         ws.Range("Q2").Value = maxticker
-        ws.Range("R2").Value = max
-        
-        'Correct the formatting before moving to the next worksheet
         ws.Range("R2").Value = Format(max, "Percent")
                 
     Next ws
@@ -77,7 +74,6 @@ Sub Least_Percent()
 
     Dim ws As Worksheet
     Dim min As Double
-        min = Worksheets("2018").Range("L2").Value
     Dim minticker As String
     
     'Loop through each worksheet
@@ -85,6 +81,9 @@ Sub Least_Percent()
     
         'Define last row for each worksheet
         lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+        'Define the min as the first value to start. Later overridden by any larger values.
+        min = ws.Range("L2").Value
         
         'Loop through rows on each worksheet to find the maximum overall
         For i = 2 To lastrow
@@ -97,13 +96,12 @@ Sub Least_Percent()
                 
             End If
         Next i
+        
+        'Record the min before moving to the next worksheet
+        ws.Range("Q3").Value = minticker
+        ws.Range("R3").Value = Format(min, "Percent")
+        
     Next ws
-    
-    'Document the maximum percent increase
-    Worksheets("2018").Range("R3").Value = Format(min, "Percent")
-    
-    'Document the maximum ticker
-    Worksheets("2018").Range("Q3").Value = minticker
 
 End Sub
 
@@ -111,7 +109,6 @@ Sub Greatest_Volume()
 
     Dim ws As Worksheet
     Dim max As Double
-        max = Worksheets("2018").Range("M2").Value
     Dim maxticker As String
     
     'Loop through each worksheet
@@ -119,6 +116,9 @@ Sub Greatest_Volume()
     
         'Define last row for each worksheet
         lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+        
+        'Define the max as the first value to start. Later overridden by any larger values.
+        max = ws.Range("M2").Value
         
         'Loop through rows on each worksheet to find the maximum overall
         For i = 2 To lastrow
@@ -131,12 +131,11 @@ Sub Greatest_Volume()
                 
             End If
         Next i
+        
+        'Record the max before moving to the next worksheet
+        ws.Range("Q4").Value = maxticker
+        ws.Range("R4").Value = max
+        
     Next ws
-    
-    'Document the maximum percent increase
-    Worksheets("2018").Range("R4").Value = max
-    
-    'Document the maximum ticker
-    Worksheets("2018").Range("Q4").Value = maxticker
 
 End Sub
