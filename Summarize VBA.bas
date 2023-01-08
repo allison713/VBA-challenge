@@ -1,4 +1,3 @@
-Attribute VB_Name = "Module1"
 Sub Summarize()
 
     Call column_names
@@ -40,7 +39,7 @@ Sub Tickers()
     'Create a variable to calculate the percent change
     Dim change As Double
     
-    'Create a variable to sum volume
+    'Create a variable to add total volume
     Dim volume As Variant
     
     volume = 0
@@ -51,7 +50,7 @@ Sub Tickers()
         'Define last row for each worksheet
         lastrow = ws.Cells(Rows.count, 1).End(xlUp).Row
         
-        'Reset a
+        'Reset a in each new worksheet
         a = 2
             
         'Loop through rows on each worksheet
@@ -87,7 +86,7 @@ Sub Tickers()
                 
                 'Format the color of the cell to change with value
                 If ws.Cells(a - 1, 12).Value >= 0 Then
-                    ws.Cells(a - 1, 12).Interior.ColorIndex = 31
+                    ws.Cells(a - 1, 12).Interior.ColorIndex = 10
                 Else
                     ws.Cells(a - 1, 12).Interior.ColorIndex = 3
                 End If
