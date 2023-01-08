@@ -85,10 +85,10 @@ Sub Tickers()
                 ws.Cells(a - 1, 12).Value = Format(change, "Percent")
                 
                 'Format the color of the cell to change with value
-                If ws.Cells(a - 1, 12).Value >= 0 Then
-                    ws.Cells(a - 1, 12).Interior.ColorIndex = 10
+                If ws.Cells(a - 1, 11).Value >= 0 Then
+                    ws.Cells(a - 1, 11).Interior.ColorIndex = 10
                 Else
-                    ws.Cells(a - 1, 12).Interior.ColorIndex = 3
+                    ws.Cells(a - 1, 11).Interior.ColorIndex = 3
                 End If
                 
                 'Add the volume each time the ticker hasn't changed
